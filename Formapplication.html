@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://tejkunitsolutions.com/pirmalNew/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form application</title>
+    <link rel="stylesheet" href="./Formapplication_files/bootstrap.min.css">
+    <script src="./Formapplication_files/dotlottie-player.mjs" type="module"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+        font-family: 'lato', sans-serif;
+        transition: all 0.5s ease;
+    }
+
+    .box {
+        width: 100%;
+        /* height: 100vh; */
+        /* background: url('assests/images/bg.png') no-repeat center center/cover; */
+    }
+
+    .background-layer {
+        background: linear-gradient(to bottom, #8478e6, #a59aff);
+        width: 100%;
+        max-width: 600px;
+        height: 350px;
+        position: absolute;
+        top: 0;
+        border-radius: 0px 0px 60px 60px/0px 0px 20px 20px;
+        z-index: -1;
+    }
+
+    .heading {
+        text-wrap: balance;
+        text-align: center;
+        color: #fff;
+        /* padding: 60px 60px 20px 60px; */
+        font-style: italic;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .heading h1 {
+        font-size: 36px;
+        line-height: 38px;
+        font-weight: 600;
+    }
+
+    .progress {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    */ .completed {
+        width: 100px;
+        height: 5px;
+        background: green;
+        margin: 0 10px;
+        border-radius: 10px;
+    }
+
+    .line {
+        width: 100px;
+        height: 5px;
+        background: #fff;
+        margin: 0 10px;
+        border-radius: 10px;
+    }
+
+    .card {
+        margin: 40px 20px 20px 20px;
+        padding: 20px;
+    }
+
+    .price p {
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    .price h2 {
+        font-size: 46px;
+        margin-bottom: 0px;
+        font-weight: bolder;
+        line-height: 48px;
+    }
+
+    .photo img {
+        width: 60px;
+        padding: 2px;
+        /* padding-right: 10px; */
+    }
+
+
+    #multiStepForm {
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #afafaf; */
+        border-radius: 10px;
+        /* padding: 20px; */
+    }
+
+    #multiStepForm h2 {
+        padding-bottom: 20px;
+        font-size: 32px;
+    }
+
+    label {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 0px;
+    }
+
+    /* input {
+        width: 100%;
+        height: 45px;
+        border: 1px solid #afafaf;
+        border-radius: 5px;
+        padding: 10px;
+    } */
+
+    /* .checkbox input {
+        height: 40px;
+        width: 60px;
+        margin: 0px 5px;
+        font-size: 15px;
+    }
+
+    .checkbox {
+        font-size: 15px;
+    } */
+
+    button {
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
+        border-radius: 5px;
+        /* margin-top: 20px; */
+        font-weight: 600;
+        text-align: center;
+        border: rgb(128, 128, 128) 2px;
+    }
+
+    .pre {
+        background-color: #afafaf;
+    }
+
+    .next {
+        background-image: linear-gradient(to top, #5d4fb1, #8478e6);
+        color: white;
+    }
+
+    .next:active,
+    .next:focus {
+        background-image: linear-gradient(to top, #8478e6, #5d4fb1);
+    }
+
+    .submit {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #d0caff;
+    }
+
+    .f-14 {
+        font-size: 14px !important;
+        /* color: #8478e6; */
+        font-weight: 400;
+    }
+
+    .circle img {
+        width: 25px;
+    }
+
+    .box2 {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #afafaf80;
+        margin: 0px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    /* .card_img img {
+        width: 60%;
+    } */
+
+    .error-message {
+        color: red;
+        font-size: 12px;
+    }
+
+    select>option {
+        width: 100% !important;
+    }
+
+    /* input[type=radio] {
+        box-sizing: border-box;
+        padding-right: 20px;
+        width: 20px;
+    } */
+
+    .radio label {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    select {
+        width: 100%;
+        border: 1px solid #afafaf;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .color-custom {
+        color: #8478e6;
+    }
+
+    .color-custom-80 {
+        color: #8478e6;
+        opacity: 0.8;
+    }
+
+    .bg-custom {
+        background-color: #8478e6;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        /* justify-self: unset; */
+        justify-content: center;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .text-green {
+        color: #4CAF50;
+    }
+
+    .preloader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+    }
+
+    @media screen and (min-width: 600px) {
+        body {
+            display: none;
+        }
+    }
+</style><style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+
+
+<body class="bg-light pb-5" style="overflow: auto;">
+    <div class="preloader" style="transition: opacity 0.5s ease-out; opacity: 0; display: none;">
+        <dotlottie-player src="https://lottie.host/7e9af526-7bd0-41b7-b3f3-57a32bca89a0/lb4qOhMklK.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop="" autoplay=""><template shadowrootmode="open"><!---->
+      <div id="animation-container" lang="en" role="img" aria-label="lottie-animation-container" class="main">
+        <div id="animation" class="animation" style="background:transparent;">
+          <!--?lit$4767742435$-->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 480 480" width="480" height="480" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;"><defs><clippath id="__lottie_element_2"><rect width="480" height="480" x="0" y="0"></rect></clippath><lineargradient id="__lottie_element_9" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-50.06999969482422" y1="-91.03900146484375" x2="70.08200073242188" y2="67.8030014038086"><stop offset="0%" stop-color="rgb(255,234,0)"></stop><stop offset="50%" stop-color="rgb(255,228,0)"></stop><stop offset="100%" stop-color="rgb(255,221,0)"></stop></lineargradient><lineargradient id="__lottie_element_16" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-36.17599868774414" y1="-68.43900299072266" x2="52.7599983215332" y2="47.957000732421875"><stop offset="0%" stop-color="rgb(255,234,0)"></stop><stop offset="50%" stop-color="rgb(255,228,0)"></stop><stop offset="100%" stop-color="rgb(255,221,0)"></stop></lineargradient><g id="__lottie_element_23"><g transform="matrix(1,0,0,1,237,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(35,21,38)" fill-opacity="1" d=" M3,-107 C-52.22800064086914,-107 -97,-62.229000091552734 -97,-7 C-97,48.22800064086914 -52.22800064086914,93 3,93 C58.22800064086914,93 103,48.22800064086914 103,-7 C103,-62.229000091552734 58.22800064086914,-107 3,-107z M3,73 C-41.18299865722656,73 -77,37.18299865722656 -77,-7 C-77,-51.18299865722656 -41.18299865722656,-87 3,-87 C47.18299865722656,-87 83,-51.18299865722656 83,-7 C83,37.18299865722656 47.18299865722656,73 3,73z"></path></g><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(35,21,38)" fill-opacity="1" d=" M3,-79.5 C-37.04100036621094,-79.5 -69.5,-47.04100036621094 -69.5,-7 C-69.5,33.04100036621094 -37.04100036621094,65.5 3,65.5 C43.04100036621094,65.5 75.5,33.04100036621094 75.5,-7 C75.5,-47.04100036621094 43.04100036621094,-79.5 3,-79.5z"></path></g></g></g><mask id="__lottie_element_23_1" mask-type="alpha"><use href="#__lottie_element_23"></use></mask><g id="__lottie_element_44"><g transform="matrix(1,0,0,1,237,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(35,21,38)" fill-opacity="1" d=" M3,-107 C-52.22800064086914,-107 -97,-62.229000091552734 -97,-7 C-97,48.22800064086914 -52.22800064086914,93 3,93 C58.22800064086914,93 103,48.22800064086914 103,-7 C103,-62.229000091552734 58.22800064086914,-107 3,-107z M3,73 C-41.18299865722656,73 -77,37.18299865722656 -77,-7 C-77,-51.18299865722656 -41.18299865722656,-87 3,-87 C47.18299865722656,-87 83,-51.18299865722656 83,-7 C83,37.18299865722656 47.18299865722656,73 3,73z"></path></g><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(35,21,38)" fill-opacity="1" d=" M3,-79.5 C-37.04100036621094,-79.5 -69.5,-47.04100036621094 -69.5,-7 C-69.5,33.04100036621094 -37.04100036621094,65.5 3,65.5 C43.04100036621094,65.5 75.5,33.04100036621094 75.5,-7 C75.5,-47.04100036621094 43.04100036621094,-79.5 3,-79.5z"></path></g></g></g><mask id="__lottie_element_44_1" mask-type="alpha"><use href="#__lottie_element_44"></use></mask></defs><g clip-path="url(#__lottie_element_2)"><g transform="matrix(1,0,0,1,237,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(255,159,0)" fill-opacity="1" d=" M8.737215995788574,92.83369445800781 C5.1937360763549805,92.83369445800781 2.993741035461426,92.8346939086914 2.993741035461426,92.8346939086914 C2.993741035461426,92.8346939086914 2.993741035461426,52.983036041259766 2.993741035461426,-7.067963123321533 C2.993741035461426,-67.01696014404297 2.993741035461426,-106.8682861328125 2.993741035461426,-106.8682861328125 C2.993741035461426,-106.8682861328125 5.396173000335693,-106.8692855834961 8.737215995788574,-106.8692855834961 C56.17500686645508,-106.8692855834961 101.134521484375,-64.48639678955078 101.134521484375,-7.25 C101.134521484375,51.320640563964844 55.841312408447266,92.83369445800781 8.737215995788574,92.83369445800781z"></path></g></g><g transform="matrix(0.9532399773597717,0,0,1,233.15591430664062,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="url(#__lottie_element_9)" fill-opacity="1" d=" M103,-7 C103,48.22800064086914 58.22800064086914,93 3,93 C-52.22800064086914,93 -97,48.22800064086914 -97,-7 C-97,-62.22800064086914 -52.22800064086914,-107 3,-107 C58.22800064086914,-107 103,-62.22800064086914 103,-7z"></path></g></g><g transform="matrix(0.9532399773597717,0,0,1,233.15591430664062,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(255,187,0)" fill-opacity="1" d=" M83,-7 C83,37.18299865722656 47.18299865722656,73 3,73 C-41.18299865722656,73 -77,37.18299865722656 -77,-7 C-77,-51.18299865722656 -41.18299865722656,-87 3,-87 C47.18299865722656,-87 83,-51.18299865722656 83,-7z"></path></g></g><g transform="matrix(0.9532399773597717,0,0,1,233.15591430664062,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="url(#__lottie_element_16)" fill-opacity="1" d=" M75.5,-7 C75.5,33.04100036621094 43.04100036621094,65.5 3,65.5 C-37.04100036621094,65.5 -69.5,33.04100036621094 -69.5,-7 C-69.5,-47.04100036621094 -37.04100036621094,-79.5 3,-79.5 C43.04100036621094,-79.5 75.5,-47.04100036621094 75.5,-7z"></path></g></g><g transform="matrix(2.9728312492370605,0,0,3.1186599731445312,232.67929077148438,282.5)" opacity="1" fill="rgb(255,138,0)" font-size="36" font-family="Konnect" font-style="normal" font-weight="400" aria-label="â¹" style="display: block;"><g stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="4" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: inherit;"><g><g style="display: none;"></g></g></g><g stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="4" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: inherit;"><g><g style="display: none;"></g></g></g><g stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="4" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: inherit;"><g><g style="display: none;"></g></g></g></g><g mask="url(#__lottie_element_23_1)" style="display: block;"><g transform="matrix(0.6427876353263855,-0.7660444378852844,0.9651317000389099,0.8098416328430176,-3.0871734619140625,520.4098510742188)" opacity="0.5"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(255,255,255)" fill-opacity="1" d=" M242,93 C242,93 162,93 162,93 C162,93 162,-107 162,-107 C162,-107 242,-107 242,-107 C242,-107 242,93 242,93z"></path></g></g></g><g mask="url(#__lottie_element_44_1)" style="display: block;"><g transform="matrix(0.6427876353263855,-0.7660444378852844,0.9651317000389099,0.8098416328430176,-3.0871734619140625,520.4098510742188)" opacity="0.5"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(255,255,255)" fill-opacity="1" d=" M242,93 C242,93 162,93 162,93 C162,93 162,-107 162,-107 C162,-107 242,-107 242,-107 C242,-107 242,93 242,93z"></path></g></g></g><g transform="matrix(0,0,0,0,242.50900268554688,140.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,255,255)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0,0,0,0,376.5090026855469,194.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,226,0)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0,0,0,0,241.50900268554688,339.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,255,255)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0,0,0,0,134.50900268554688,135.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,213,0)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0,0,0,0,338.5090026855469,380.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,213,0)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0.05801980197429657,0.3882009983062744,-0.3882009983062744,0.05801980197429657,78.11731719970703,368.8637390136719)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,213,0)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g></g></svg></div>
+        <!--?lit$4767742435$-->
+      </div>
+    </template></dotlottie-player>
+    </div>
+    <div class="box d-flex flex-column">
+        <div class="background-layer"></div>
+
+        <div class="heading pt-5">
+            <h1 class="text-center">Get Instant Loan <br> in 5 Minutes</h1>
+            <div class="d-flex align-items-center justify-content-center gap-1 mt-2 rounded-pill p-1 border bg-white color-custom" style="width: fit-content;">
+                <img src="./Formapplication_files/luggage.svg" alt="icon" width="30px" height="30px" class="bg-primary  rounded rounded-circle border p-1 icon">
+                <img src="./Formapplication_files/personal.svg" alt="icon" width="30px" height="30px" class="bg-warning  rounded rounded-circle border p-1 icon" style="margin-left: -10px;">
+                <img src="./Formapplication_files/cap.svg" alt="icon" width="30px" height="30px" class="bg-success  rounded rounded-circle border p-1 icon" style="margin-left: -10px;">
+                <small class="m-1"><b>Get one loan for all your needs.</b></small>
+            </div>
+        </div>
+
+        <div class="card rounded-4">
+            <div class="d-flex flex-row justify-content-between align-items-center border-bottom pb-4 photo">
+                <div class="d-flex flex-column price ">
+                    <p class="m-0">Get Instant loan upto</p>
+                    <h2 class="m-0 text-green"><span style="font-weight: 600;">₹</span>500000*</h2>
+                </div>
+                <div class="bg-custom">
+                    <img src="./Formapplication_files/person-circle.svg" alt="">
+                </div>
+            </div>
+
+            <form id="multiStepForm" novalidate="">
+                <!-- Step 1: Personal Information -->
+                <div class="form-step position-relative" id="step-1">
+                    <div class="mt-4">
+                        <label class="text-muted" for="name">Name as per PAN (Required):</label>
+                        <input type="text" id="name" name="name" class="form-control " required="" placeholder="Enter your Full Name" onkeydown="return !/^\d$/.test(event.key) &amp;&amp; !event.key.match(/[^\w\s]/gi);">
+                        <small class="name-error text-danger d-none">Please Enter valid Name</small>
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="text-muted" for="mobile">Mobile Number:</label>
+                        <input type="number" id="mobile" name="mobile" class="form-control" required="" placeholder="Enter your Mobile Number" oninput="this.value = this.value.slice(0, 10)">
+                        <small class="mobile-error text-danger d-none">Please Enter valid Mobile Number</small>
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="text-muted" for="pincode">Pincode:</label>
+                        <input type="number" id="pincode" name="pincode" class="form-control" required="" placeholder="Enter your Pincode" oninput="this.value = this.value.slice(0, 6)">
+                        <small class="pincode-error text-danger d-none">Please Enter valid Pincode</small>
+                    </div>
+
+
+                    <div class="mt-3">
+                        <div class="form-check ">
+                            <input type="checkbox" class="form-check-input" id="terms" name="terms" required="">
+                            <label class="form-check-label f-14" for="terms" style="font-weight: 500;">
+                                I consent to receive transactional and promotional SMS, WhatsApp messages and calls from
+                                the providers and their representatives.
+                            </label>
+                            <small class="optin-error text-danger d-none">Please check to proceed</small>
+                        </div>
+                    </div>
+
+                    <div class="button-group mt-3 bg-white pb-2" style="text-align: right; position: sticky; bottom: 0px; left: 0; width: 100%;">
+                        <button type="button" class="next" onclick="nextStep()">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Employment Details -->
+                <div class="form-step pt-3 d-none" id="step-2">
+                    <div class="form-group mt-4 ">
+                        <label>Employment Type (Required):</label>
+                        <div class="d-flex flex-column radio">
+                            <div class="form-check col-12 border px-0 py-2 mt-1 rounded-2" onclick="document.getElementById('salaried').checked = true; document.getElementById('salaryDetails').classList.remove('d-none');">
+                                <input class="form-check-input mx-1 ms-3" type="radio" name="employment-type" id="salaried" value="salaried">
+                                <label class="form-check-label ms-2 f-14" for="salaried">
+                                    Salaried
+                                </label>
+                            </div>
+
+                            <div class="form-check col-12 border px-0 py-2 mt-2 rounded-2" onclick="document.getElementById('selfEmployed').checked = true; document.getElementById('salaryDetails').classList.add('d-none');">
+                                <input class="form-check-input mx-1 ms-3" type="radio" name="employment-type" id="selfEmployed" value="selfEmployed">
+                                <label class="form-check-label ms-2 f-14" for="selfEmployed">
+                                    Self-Employeed
+                                </label>
+                            </div>
+                        </div>
+                        <small class="employment-error text-danger d-none">Select Employmnent Type</small>
+                    </div>
+
+                    <!-- Conditional for Salaried -->
+                    <div id="salaryDetails" class="mt-3 d-none">
+                        <label for="salaryMethod">How do you receive your salary?:</label>
+                        <select id="salaryMethod" name="salaryMethod" class="form-select custom-select mt-1">
+                            <option value="" disabled="" selected="">Select an option</option>
+                            <option value="cheque">Cheque</option>
+                            <option value="bankTransfer">Bank Transfer</option>
+                            <option value="cash">Cash</option>
+                        </select>
+                        <small class="salary-mode-error text-danger d-none">Select Salary mode</small>
+                    </div>
+
+                    <!-- Conditional for Self-Employed -->
+                    <div id="selfEmployedDetails" class="mt-3">
+                        <label for="income">Enter your monthly income (Required):</label>
+                        <input type="number" id="income" name="income" class="form-control mt-1" placeholder="Enter your monthly income">
+                        <small class="income-error text-danger d-none">Enter Monthly Salary</small>
+                    </div>
+
+                    <div class="button-group d-flex justify-content-between mt-4">
+                        <button type="button" class="pre d-none" onclick="previousStep(1)">Previous</button>
+                        <button type="button" class="next" onclick="submitstep()">Submit</button>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between mt-5">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="circle">
+                            <img src="./Formapplication_files/low.svg" alt="">
+                        </div>
+                        <p class="m-0 text-center f-14">Low Interest</p>
+                    </div>
+
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="circle">
+                            <img src="./Formapplication_files/shield.svg" alt="">
+                        </div>
+                        <p class="m-0 text-center f-14">Turely Secure</p>
+                    </div>
+
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="circle">
+                            <img src="./Formapplication_files/doc.svg" alt="">
+                        </div>
+                        <p class="m-0 text-center f-14">Digital Process</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<script type="module" src="./Formapplication_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<script>
+
+    window.onload = function () {
+        var preloader = document.querySelector('.preloader');
+        preloader.style.transition = 'opacity 0.5s ease-out';
+        preloader.style.opacity = 0;
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+        document.body.style.overflow = 'auto';
+    };
+
+
+    function nextStep() {
+        var name = document.getElementById('name').value;
+        var mobile = document.getElementById('mobile').value;
+        var pincode = document.getElementById('pincode').value;
+        var terms = document.getElementById('terms').checked;
+
+        if (name.trim() === '' || !/^[a-zA-Z\s]+$/.test(name)) {
+            document.getElementById('name').classList.add('is-invalid');
+            document.querySelector('.name-error').classList.remove('d-none');
+        } else {
+            document.getElementById('name').classList.remove('is-invalid');
+            document.querySelector('.name-error').classList.add('d-none');
+        }
+
+        if (mobile.length !== 10 || !/^[6-9]\d{9}$/.test(mobile)) {
+            document.getElementById('mobile').classList.add('is-invalid');
+            document.querySelector('.mobile-error').classList.remove('d-none');
+        } else {
+            document.getElementById('mobile').classList.remove('is-invalid');
+            document.querySelector('.mobile-error').classList.add('d-none');
+        }
+
+        if (pincode.length !== 6 || !/^[1-9]\d{5}$/.test(pincode)) {
+            document.getElementById('pincode').classList.add('is-invalid');
+            document.querySelector('.pincode-error').classList.remove('d-none');
+        } else {
+            document.getElementById('pincode').classList.remove('is-invalid');
+            document.querySelector('.pincode-error').classList.add('d-none');
+        }
+
+        if (!terms) {
+            document.getElementById('terms').classList.add('is-invalid');
+            document.querySelector('.optin-error').classList.remove('d-none');
+        } else {
+            document.getElementById('terms').classList.remove('is-invalid');
+            document.querySelector('.optin-error').classList.add('d-none');
+        }
+
+        if (name.trim() !== '' && /^[a-zA-Z\s]+$/.test(name) && mobile.length === 10 && /^[6-9]\d{9}$/.test(mobile) && pincode.length === 6 && /^[1-9]\d{5}$/.test(pincode) && terms) {
+            document.getElementById('step-1').classList.add('d-none');
+            document.getElementById('step-2').classList.remove('d-none');
+        }
+    }
+
+
+    function submitstep() {
+        var employmentType = document.querySelector('input[name="employment-type"]:checked')?.value || '';
+        var salaryMode = document.getElementById('salaryMethod');
+        var income = document.getElementById('income');
+
+        if (employmentType === '') {
+            document.querySelector('.employment-error')?.classList.remove('d-none');
+        } else {
+            document.querySelector('.employment-error')?.classList.add('d-none');
+        }
+
+        if (employmentType === 'salaried') {
+            if (salaryMode?.value === '') {
+                document.querySelector('.salary-mode-error')?.classList.remove('d-none');
+            } else {
+                document.querySelector('.salary-mode-error')?.classList.add('d-none');
+            }
+        }
+
+        if (income?.value === '' || isNaN(income?.value)) {
+            document.querySelector('.income-error')?.classList.remove('d-none');
+        } else {
+            document.querySelector('.income-error')?.classList.add('d-none');
+        }
+
+        if (employmentType !== '' && income?.value !== '' && (employmentType !== 'salaried' || salaryMode?.value !== '')) {
+            window.location = "offerpage.html";
+        }
+    }
+
+
+
+
+</script>
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>
