@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Studio | UI foundations",
-  description: "A shadcn/ui component workspace powered by a warm amber design system.",
+  title: "Gaming Campaigns | Personal Index",
+  description: "A digitized collection of gaming, fintech, and reward campaign pages.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
