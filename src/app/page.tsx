@@ -1,11 +1,29 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink, Search, X } from "lucide-react";
-import { motion } from "motion/react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {
+    ArrowDown,
+    ArrowLeft,
+    ArrowRight,
+    ArrowUpRight,
+    ExternalLink,
+    Search,
+    X,
+} from "lucide-react";
+import { MotionConfig, motion } from "motion/react";
+import {
+    Badge,
+    BlurFade,
+    Button,
+    Card,
+    Input,
+    Modal,
+    ModalContent,
+    ModalDescription,
+    ModalHeader,
+    ModalTitle,
+    RevealText,
+} from "@glinui/ui";
 import SlidingTestimonial from "@/components/ui/sliding-testimonial";
 import { landingPageGroups, type LandingPage, type LandingPageGroup } from "@/lib/landing-pages";
 
@@ -26,16 +44,22 @@ function PageCard({
 
     return (
         <motion.article
-            className="group w-[clamp(145px,52vw,205px)] shrink-0 snap-start sm:w-[clamp(150px,23vw,188px)] lg:w-[clamp(150px,16.8vw,205px)]"
-            initial={{ opacity: 0, y: 12 }}
+            className="w-[clamp(158px,43vw,218px)] shrink-0 snap-start sm:w-[clamp(176px,26vw,218px)] lg:w-[clamp(176px,18vw,220px)]"
+            initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.12 }}
             transition={{ duration: 0.42, delay: (index % 3) * 0.055, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ y: -3 }}
+            whileHover={{ y: -4 }}
         >
-            <div className="relative mx-auto w-full rounded-[27px] border border-[#474747] bg-[linear-gradient(135deg,#343434,#090909_48%,#292929)] p-[5px] shadow-[0_2px_6px_rgba(0,0,0,.09),inset_0_1px_rgba(255,255,255,.2)] transition-[border-color,box-shadow] duration-200 group-hover:border-[#77756f] group-hover:shadow-[0_8px_18px_rgba(0,0,0,.13)]">
-                <div className="relative aspect-[9/16.5] overflow-hidden rounded-[22px] bg-[#f0efec]">
-                    <span className="pointer-events-none absolute left-1/2 top-[7px] z-[1] h-[10px] w-[29%] -translate-x-1/2 rounded-full bg-[#111]" aria-hidden="true" />
+            <Card
+                variant="default"
+                className="group min-w-0 overflow-hidden rounded-[1.4rem] border border-line bg-panel p-2 shadow-[var(--shadow-glass-sm)] transition-[border-color,box-shadow] duration-200 hover:border-brand/50 hover:shadow-[var(--shadow-glass-md)]"
+            >
+                <div className="relative aspect-[9/16.5] overflow-hidden rounded-[1.05rem] bg-[color-mix(in_oklch,var(--color-foreground)_7%,var(--color-background))]">
+                    <span
+                        className="pointer-events-none absolute left-1/2 top-2 z-[1] h-2.5 w-[29%] -translate-x-1/2 rounded-full bg-neutral-950"
+                        aria-hidden="true"
+                    />
                     <iframe
                         src={archivePath}
                         title={`${page.title} live preview`}
@@ -44,31 +68,48 @@ function PageCard({
                         referrerPolicy="no-referrer"
                         tabIndex={-1}
                         aria-hidden="true"
-                        className="pointer-events-none block h-full w-full border-0 bg-[#f4f3f0]"
+                        className="block h-full w-full border-0 bg-white"
                     />
-                    <button
+                    <Button
                         type="button"
-                        className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded border border-white/35 bg-black/85 px-2 py-[7px] font-mono text-[8px] leading-none text-white opacity-95 transition hover:-translate-y-px hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bc8618]"
+                        size="sm"
+                        variant="default"
+                        className="absolute bottom-3 right-3 z-10 rounded-full px-3 text-xs shadow-lg"
                         onClick={() => onOpen(page, group)}
                         aria-label={`Explore ${page.title}`}
                     >
-                        Explore page <ArrowUpRight size={13} />
-                    </button>
+                        Explore <ArrowUpRight size={14} aria-hidden="true" />
+                    </Button>
                 </div>
-            </div>
-            <button
-                type="button"
-                className="group block w-full cursor-pointer bg-transparent px-px pt-2.5 text-left text-inherit focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#bc8618]"
-                onClick={() => onOpen(page, group)}
-            >
-                <span className="flex items-baseline gap-2">
-                    <span className="font-mono text-[8px] leading-none text-[#9b9891]">{String(number).padStart(2, "0")}</span>
-                    <span className="min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-xs font-semibold text-[#181817]">{page.title}</span>
-                    <ArrowUpRight className="shrink-0 text-[#88867f] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#a57200]" size={15} />
-                </span>
-                <span className="mt-1 ml-[21px] block overflow-hidden text-ellipsis whitespace-nowrap text-[9px] text-[#77756f]">{page.note}</span>
-                <span className="mt-1 ml-[21px] block font-mono text-[7px] uppercase leading-relaxed tracking-[.06em] text-[#9b9891]">{group.title}</span>
-            </button>
+                {/* <div className="px-2 pb-2 pt-3">
+                    <Button
+                        type="button"
+                        variant="ghost"
+                        className="h-auto w-full justify-start rounded-lg p-1.5 text-left"
+                        onClick={() => onOpen(page, group)}
+                    >
+                        <span className="flex min-w-0 items-center gap-2">
+                            <span className="font-mono text-[10px] tabular-nums text-subtle">
+                                {String(number).padStart(2, "0")}
+                            </span>
+                            <span className="min-w-0 flex-1 truncate text-sm font-semibold text-ink">
+                                {page.title}
+                            </span>
+                            <ArrowUpRight
+                                className="shrink-0 text-subtle transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand"
+                                size={15}
+                                aria-hidden="true"
+                            />
+                        </span>
+                    </Button>
+                    <p className="mb-0 mt-1 truncate px-1.5 text-xs leading-relaxed text-muted">
+                        {page.note}
+                    </p>
+                    <p className="mb-0 mt-2 px-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-subtle">
+                        {group.title}
+                    </p>
+                </div> */}
+            </Card>
         </motion.article>
     );
 }
@@ -104,6 +145,7 @@ function GallerySection({
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
     const pagesKey = group.pages.map((page) => page.path).join("|");
+    const galleryId = `${group.id}-gallery`;
 
     useEffect(() => {
         const rail = gallery.current;
@@ -138,53 +180,92 @@ function GallerySection({
     }
 
     return (
-        <section className="grid min-h-0 min-h-[min(650px,calc(100svh-110px))] grid-cols-1 items-center gap-5 border-b border-[#d5d4d0] py-2 scroll-mt-20 lg:grid-cols-[minmax(190px,.76fr)_minmax(0,2.4fr)] lg:gap-[clamp(22px,3.8vw,58px)]">
-            <header className="flex items-end justify-between gap-3 border-b border-[#d5d4d0] pb-3 lg:h-full lg:flex-col lg:items-start lg:justify-center lg:border-b-0 lg:border-r lg:py-5 lg:pr-[clamp(16px,2vw,30px)]">
-                <div className="flex flex-col items-start gap-2.5 lg:gap-[13px]">
-                    <span className="font-mono text-[9px] leading-relaxed tracking-[.08em] text-[#898781]">{group.index} / 04</span>
+        <section
+            id={group.id}
+            aria-labelledby={`${group.id}-title`}
+            className="grid scroll-mt-24 grid-cols-1 items-start gap-6 border-b border-line py-section lg:grid-cols-[minmax(190px,0.72fr)_minmax(0,2.4fr)] lg:items-center lg:gap-10"
+        >
+            <header className="flex items-end justify-between gap-4 lg:h-full lg:flex-col lg:items-start lg:justify-center">
+                <div className="flex flex-col items-start gap-3">
+                    <span className="font-mono text-[10px] tracking-[0.14em] text-subtle">
+                        {group.index} <span className="text-brand">/</span> 04
+                    </span>
                     <div>
-                        <h2 className="m-0 font-serif text-[22px] font-medium leading-none text-[#111] sm:text-[27px]">{group.title}</h2>
-                        <p className="mt-1.5 max-w-[240px] text-[10px] text-[#73716d]">{group.description}</p>
+                        <h2
+                            id={`${group.id}-title`}
+                            className="m-0 font-serif text-[clamp(1.65rem,3vw,2.35rem)] font-medium leading-tight tracking-[-0.035em] text-ink"
+                        >
+                            <RevealText
+                                text={group.title}
+                                direction="left"
+                                duration={0.65}
+                                delay={80}
+                                className="max-w-full"
+                            />
+                        </h2>
+                        <BlurFade delay={180} duration={600} blur={4} yOffset={8}>
+                            <p className="mb-0 mt-2 max-w-[28ch] text-sm leading-relaxed text-muted">
+                                {group.description}
+                            </p>
+                        </BlurFade>
                     </div>
                 </div>
-                <span className="shrink-0 font-mono text-[8px] leading-relaxed tracking-[.08em] text-[#898781]">{String(group.pages.length).padStart(2, "0")} PAGES</span>
+                <BlurFade delay={260} duration={550} blur={3} yOffset={6}>
+                    <Badge variant="outline" size="sm" className="shrink-0 rounded-full px-3 font-mono text-[10px] uppercase tracking-[0.08em]">
+                        {String(group.pages.length).padStart(2, "0")} pages
+                    </Badge>
+                </BlurFade>
             </header>
 
-            <div className="grid min-w-0 gap-2.5 lg:gap-3.5">
-                <div className="flex items-center justify-between gap-3 font-mono text-[7px] tracking-[.08em] text-[#898781] sm:text-[8px]">
-                    <span>SCROLL TO EXPLORE <span className="px-[3px] text-[#c59729]" aria-hidden="true">·</span> {String(group.pages.length).padStart(2, "0")} SCREENS</span>
-                    <div className="flex gap-2">
+            <div className="grid min-w-0 gap-4">
+                <div className="flex items-center justify-between gap-4">
+                    <p className="mb-0 font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">
+                        Campaign previews <span className="px-1 text-brand" aria-hidden="true">/</span>{" "}
+                        {String(group.pages.length).padStart(2, "0")} screens
+                    </p>
+                    <div className="flex shrink-0 gap-2">
                         <Button
                             variant="outline"
-                            size="icon"
-                            className="size-[34px] rounded-full text-[#222] disabled:opacity-40 lg:size-[39px]"
+                            size="md"
+                            className="size-10 rounded-full p-0"
                             disabled={!canScrollLeft}
                             onClick={() => scrollGallery(-1)}
                             aria-label={`Scroll ${group.title} left`}
+                            aria-controls={galleryId}
                         >
-                            <ArrowLeft size={17} />
+                            <ArrowLeft size={17} aria-hidden="true" />
                         </Button>
                         <Button
                             variant="outline"
-                            size="icon"
-                            className="size-[34px] rounded-full text-[#222] disabled:opacity-40 lg:size-[39px]"
+                            size="md"
+                            className="size-10 rounded-full p-0"
                             disabled={!canScrollRight}
                             onClick={() => scrollGallery(1)}
                             aria-label={`Scroll ${group.title} right`}
+                            aria-controls={galleryId}
                         >
-                            <ArrowRight size={17} />
+                            <ArrowRight size={17} aria-hidden="true" />
                         </Button>
                     </div>
                 </div>
                 <div
-                    className="flex min-w-0 snap-x snap-mandatory items-start gap-[clamp(12px,1.6vw,24px)] overflow-x-auto overflow-y-hidden overscroll-x-contain touch-pan-x px-[2px] pt-[5px] pb-[13px] [scroll-padding-inline:2px] [scrollbar-color:#c5c3bd_transparent] [scrollbar-width:thin] [mask-image:linear-gradient(to_right,transparent,black_32px,black_calc(100%_-_32px),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_32px,black_calc(100%_-_32px),transparent)]"
+                    id={galleryId}
+                    className="campaign-rail flex min-w-0 snap-x snap-mandatory items-start gap-4 overflow-x-auto overscroll-x-contain px-1 pb-4 pt-1 touch-pan-x sm:gap-5"
                     ref={gallery}
                     onScroll={updateScrollControls}
                     aria-label={`${group.title} mobile page previews`}
+                    role="region"
                     tabIndex={0}
                 >
                     {group.pages.map((page, index) => (
-                        <PageCard key={page.path} page={page} group={group} number={pageNumbers.get(page.path) ?? index + 1} index={index} onOpen={onOpen} />
+                        <PageCard
+                            key={page.path}
+                            page={page}
+                            group={group}
+                            number={pageNumbers.get(page.path) ?? index + 1}
+                            index={index}
+                            onOpen={onOpen}
+                        />
                     ))}
                 </div>
             </div>
@@ -199,14 +280,7 @@ function matchesPage(page: LandingPage, group: LandingPageGroup, query: string) 
 export default function Home() {
     const [query, setQuery] = useState("");
     const [selectedPreview, setSelectedPreview] = useState<{ page: LandingPage; group: LandingPageGroup } | null>(null);
-    const dialog = useRef<HTMLDialogElement>(null);
-
-    useEffect(() => {
-        const previewDialog = dialog.current;
-        if (!previewDialog) return;
-        if (selectedPreview && !previewDialog.open) previewDialog.showModal();
-        if (!selectedPreview && previewDialog.open) previewDialog.close();
-    }, [selectedPreview]);
+    const [activeGroup, setActiveGroup] = useState(landingPageGroups[0]?.id ?? "");
 
     const normalizedQuery = query.trim().toLowerCase();
     const filteredGroups = landingPageGroups.map((group) => ({
@@ -216,129 +290,264 @@ export default function Home() {
             : group.pages,
     }));
     const visibleGroups = filteredGroups.filter((group) => group.pages.length > 0);
-    const pageNumbers = new Map(landingPageGroups.flatMap((group) =>
+    const visibleGroupKey = visibleGroups.map((group) => group.id).join("|");
+    const pageNumbers = new Map(landingPageGroups.flatMap((group, groupIndex) =>
         group.pages.map((page, index) => [page.path, landingPageGroups
-            .slice(0, landingPageGroups.indexOf(group))
+            .slice(0, groupIndex)
             .reduce((total, previous) => total + previous.pages.length, 0) + index + 1] as const),
     ));
     const selectedArchivePath = selectedPreview
         ? `/archive/${selectedPreview.page.path.split("/").map(encodeURIComponent).join("/")}?preview=phone`
         : null;
 
-    function scrollToSection(id: string) {
-        document.getElementById(id)?.scrollIntoView({
-            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-            block: "start",
-        });
-    }
+    useEffect(() => {
+        const sections = visibleGroupKey
+            .split("|")
+            .filter(Boolean)
+            .map((id) => document.getElementById(id))
+            .filter((section): section is HTMLElement => section !== null);
+        if (!sections.length) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const current = entries
+                    .filter((entry) => entry.isIntersecting)
+                    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+                if (current) setActiveGroup(current.target.id);
+            },
+            { rootMargin: "-18% 0px -68% 0px", threshold: 0 },
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        return () => observer.disconnect();
+    }, [visibleGroupKey]);
 
     return (
-        <main className="min-h-screen min-w-[360px] bg-[#fcfcfb] px-[clamp(16px,5.25vw,82px)] pt-6 pb-12 text-[#111] [background-image:linear-gradient(rgba(18,18,18,.035)_1px,transparent_1px),linear-gradient(90deg,rgba(18,18,18,.035)_1px,transparent_1px)] [background-size:44px_44px] md:pt-[34px]">
-            <div className="mx-auto w-full max-w-[1500px]" id="top">
-                <section className="sticky top-0 z-30 -mx-4 flex flex-col-reverse gap-3 border-y border-[#bdbdbb] bg-[#fcfcfb]/95 px-4 py-3 backdrop-blur-md md:mx-0 md:flex-row md:items-center md:justify-between md:gap-[18px]">
-                    <nav className="flex min-w-0 flex-wrap items-center gap-x-[19px] gap-y-2" aria-label="Campaign categories">
-                        {visibleGroups.map((group) => (
-                            <a
-                                key={group.id}
-                                className="inline-flex items-center gap-1.5 font-mono text-[8px] leading-relaxed text-[#555] no-underline transition-colors hover:text-[#b47a00] sm:text-[9px]"
-                                href={`#${group.id}`}
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    scrollToSection(group.id);
-                                    window.history.replaceState(null, "", `#${group.id}`);
-                                }}
-                            >
-                                <span className="text-[8px] text-[#a4a19a]">{group.index}</span>{group.title}
-                            </a>
-                        ))}
-                    </nav>
-                    <label className="flex h-8 w-full min-w-0 shrink-0 items-center gap-[7px] border-b border-[#d8d8d4] text-[#777] md:w-[min(240px,28vw)] md:min-w-[170px]">
-                        <Search size={15} aria-hidden="true" />
-                        <Input
-                            type="search"
-                            value={query}
-                            onChange={(event) => setQuery(event.target.value)}
-                            placeholder="Find a campaign"
-                            aria-label="Find a campaign"
-                            className="h-[30px] border-0 bg-transparent p-0 font-mono text-[10px] text-[#111] shadow-none placeholder:text-[#989893] focus-visible:ring-0"
-                        />
-                        {query && <button className="grid size-[25px] shrink-0 place-items-center border-0 bg-transparent text-[#777]" type="button" onClick={() => setQuery("")} aria-label="Clear search"><X size={14} /></button>}
-                    </label>
-                </section>
+        <MotionConfig reducedMotion="user">
+            <main id="top" className="index-backdrop min-h-screen bg-page px-gutter text-ink">
+                <div className="mx-auto w-full max-w-[1440px]">
+                    <section className="grid gap-8 pb-10 pt-14 sm:pb-14 sm:pt-20 lg:grid-cols-[minmax(0,1.35fr)_minmax(230px,0.65fr)] lg:items-end lg:gap-12 lg:pb-16 lg:pt-24">
+                        <div>
+                            <BlurFade delay={40} duration={550} blur={4} yOffset={8}>
+                                <Badge
+                                    variant="glass"
+                                    size="sm"
+                                    className="mb-5 rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-[0.13em]"
+                                >
+                                    <span className="mr-2 inline-block size-1.5 rounded-full bg-brand" aria-hidden="true" />
+                                    Interactive campaign archive
+                                </Badge>
+                            </BlurFade>
+                            <h1 className="mb-0 max-w-[15ch] font-serif text-[clamp(2.6rem,7.2vw,6.1rem)] font-medium leading-[0.98] tracking-[-0.055em] text-ink">
+                                <RevealText
+                                    text="Campaign pages, collected in one place."
+                                    direction="left"
+                                    duration={0.9}
+                                    delay={100}
+                                    className="max-w-full"
+                                />
+                            </h1>
+                            <BlurFade delay={300} duration={650} blur={5} yOffset={10}>
+                                <p className="mb-0 mt-6 max-w-[58ch] text-base leading-relaxed text-muted sm:mt-7 sm:text-lg">
+                                    Explore original mobile experiences across games, fintech, rewards, and campaign follow-ups.
+                                </p>
+                            </BlurFade>
+                            <BlurFade delay={440} duration={600} blur={4} yOffset={8}>
+                                <Button asChild variant="default" size="md" className="mt-7 rounded-full px-5">
+                                    <a href={`#${visibleGroups[0]?.id ?? "top"}`} className="inline-flex items-center gap-2">
+                                        Browse the archive <ArrowDown size={16} aria-hidden="true" />
+                                    </a>
+                                </Button>
+                            </BlurFade>
+                        </div>
 
-                {visibleGroups.length > 0 ? visibleGroups.map((group) => (
-                    <div className="flex min-h-screen items-center py-[clamp(27px,5vw,66px)]" key={group.id}>
+                        <BlurFade delay={360} duration={700} blur={6} yOffset={12}>
+                            <Card
+                                variant="glass"
+                                className="grid grid-cols-2 gap-4 rounded-card p-5 sm:gap-6 sm:p-6"
+                            >
+                                <div className="border-r border-line pr-4 sm:pr-6">
+                                    <span className="font-mono text-[10px] uppercase tracking-[0.13em] text-subtle">Pages</span>
+                                    <p className="mb-0 mt-2 font-serif text-4xl tracking-[-0.04em] text-ink">
+                                        {String(landingPageGroups.reduce((total, group) => total + group.pages.length, 0)).padStart(2, "0")}
+                                    </p>
+                                </div>
+                                <div>
+                                    <span className="font-mono text-[10px] uppercase tracking-[0.13em] text-subtle">Collections</span>
+                                    <p className="mb-0 mt-2 font-serif text-4xl tracking-[-0.04em] text-ink">
+                                        {String(landingPageGroups.length).padStart(2, "0")}
+                                    </p>
+                                </div>
+                                <p className="col-span-2 mb-0 border-t border-line pt-4 text-sm leading-relaxed text-muted">
+                                    Select any screen to open an interactive preview or visit the original page.
+                                </p>
+                            </Card>
+                        </BlurFade>
+                    </section>
+
+                    <header className="sticky top-0 z-30 -mx-2 border-y border-line/80 bg-page/90 px-2 py-3 backdrop-blur-xl sm:-mx-3 sm:px-3">
+                        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
+                            <nav
+                                className="campaign-rail flex min-w-0 items-center gap-1 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible md:pb-0"
+                                aria-label="Campaign categories"
+                            >
+                                {visibleGroups.map((group) => (
+                                    <Button
+                                        key={group.id}
+                                        asChild
+                                        variant="ghost"
+                                        size="sm"
+                                        className={`h-9 shrink-0 rounded-full px-3 text-xs ${activeGroup === group.id ? "bg-brand/10 text-ink" : "text-muted"}`}
+                                    >
+                                        <a
+                                            href={`#${group.id}`}
+                                            aria-current={activeGroup === group.id ? "location" : undefined}
+                                        >
+                                            <span className="mr-1.5 font-mono text-[10px] text-subtle">{group.index}</span>
+                                            {group.title}
+                                        </a>
+                                    </Button>
+                                ))}
+                            </nav>
+                            <label className="flex h-11 w-full min-w-0 shrink-0 items-center gap-2 rounded-full border border-line bg-panel px-3 text-muted shadow-[var(--shadow-glass-inset)] transition-[border-color,box-shadow] focus-within:border-brand/60 focus-within:ring-2 focus-within:ring-brand/20 md:w-[min(290px,32vw)]">
+                                <Search size={16} aria-hidden="true" />
+                                <Input
+                                    type="search"
+                                    value={query}
+                                    onChange={(event) => setQuery(event.target.value)}
+                                    placeholder="Find a campaign"
+                                    aria-label="Find a campaign"
+                                    variant="ghost"
+                                    size="sm"
+                                    className="h-9 min-w-0 border-0 bg-transparent px-1 text-sm text-ink shadow-none placeholder:text-subtle focus-visible:ring-0"
+                                />
+                                {query && (
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        className="size-8 shrink-0 rounded-full p-0"
+                                        type="button"
+                                        onClick={() => setQuery("")}
+                                        aria-label="Clear search"
+                                    >
+                                        <X size={15} aria-hidden="true" />
+                                    </Button>
+                                )}
+                            </label>
+                        </div>
+                    </header>
+
+                    {visibleGroups.length > 0 ? visibleGroups.map((group) => (
                         <GallerySection
+                            key={group.id}
                             group={group}
                             pageNumbers={pageNumbers}
                             onOpen={(page, selectedGroup) => setSelectedPreview({ page, group: selectedGroup })}
                         />
-                    </div>
-                )) : (
-                    <div className="mx-auto my-[65px] text-center">
-                        <span className="font-mono text-[9px] tracking-[.15em] text-[#88867f]">NO MATCHES</span>
-                        <p className="mt-2 font-serif text-[21px] text-[#555]">Nothing in the archive by that name. Try another search.</p>
-                    </div>
-                )}
+                    )) : (
+                        <div className="mx-auto py-20 text-center sm:py-28">
+                            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">No matches</span>
+                            <BlurFade delay={120} duration={550} blur={4} yOffset={8}>
+                                <p className="mb-0 mt-3 font-serif text-2xl text-muted">
+                                    Nothing in the archive by that name. Try another search.
+                                </p>
+                            </BlurFade>
+                        </div>
+                    )}
 
-                <SlidingTestimonial />
+                    <SlidingTestimonial />
 
-                <footer className="mt-[72px] flex items-center justify-between gap-2.5 border-t-2 border-[#171717] pt-3 font-mono text-[7px] tracking-[.09em] text-[#77756f] sm:text-[8px]">
-                    <span>END OF INDEX</span>
-                    <span>MADE FROM MEMORIES <i className="text-[#c3942b] not-italic">✳</i></span>
-                    <a className="text-inherit no-underline hover:text-[#111]" href="#top">BACK TO TOP ↑</a>
-                </footer>
-            </div>
+                    <footer className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-line py-6 font-mono text-[10px] uppercase tracking-[0.11em] text-subtle sm:mt-24">
+                        <span>End of index</span>
+                        <span>Made from memories <i className="text-brand not-italic" aria-hidden="true">✳</i></span>
+                        <a className="rounded-full px-2 py-1 text-ink transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" href="#top">
+                            Back to top ↑
+                        </a>
+                    </footer>
+                </div>
 
-            <dialog
-                ref={dialog}
-                className="fixed inset-0 m-auto h-[calc(100dvh-24px)] w-[calc(100vw-24px)] max-h-none max-w-none overflow-hidden rounded-xl border border-[#d5d4d0] bg-[#fcfcfb] p-0 text-[#181817] shadow-[0_28px_90px_rgba(0,0,0,.24)] backdrop:bg-black/60 backdrop:backdrop-blur-sm open:animate-in open:fade-in open:zoom-in-95 md:h-[min(760px,calc(100dvh-40px))] md:w-[min(940px,calc(100vw-40px)]"
-                aria-labelledby="preview-dialog-title"
-                onClose={() => setSelectedPreview(null)}
-                onClick={(event) => {
-                    if (event.target === event.currentTarget) dialog.current?.close();
-                }}
-            >
-                {selectedPreview && selectedArchivePath && (
-                    <div className="grid h-full grid-rows-[auto_minmax(0,1fr)]">
-                        <header className="flex items-center justify-between border-b border-[#deddd9] px-4 py-2.5 pl-5">
-                            <span className="font-mono text-[8px] tracking-[.1em] text-[#77756f]">PAGE PREVIEW <span className="px-1 text-[#c3942b]">·</span> {selectedPreview.group.title.toUpperCase()}</span>
-                            <Button variant="ghost" size="icon" className="size-[34px] text-[#555]" aria-label="Close page preview" onClick={() => dialog.current?.close()}><X size={18} /></Button>
-                        </header>
-                        <div className="grid min-h-0 grid-rows-[minmax(220px,1fr)_auto] gap-3 overflow-y-auto p-3 md:grid-cols-[minmax(0,1fr)_275px] md:grid-rows-1 md:gap-[clamp(18px,3vw,34px)] md:p-5">
-                            <div className="grid min-h-0 min-w-0 place-items-center overflow-hidden rounded-lg border border-[#e0dfda] bg-[#f1f0ec] bg-[linear-gradient(rgba(18,18,18,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(18,18,18,.04)_1px,transparent_1px)] bg-[size:24px_24px] p-2 md:p-3.5">
-                                <div className="relative aspect-[9/16] h-[90%] max-h-[430px] max-w-full rounded-[27px] border border-[#474747] bg-[linear-gradient(135deg,#343434,#090909_48%,#292929)] p-[5px] shadow-[0_5px_16px_rgba(0,0,0,.16)]">
-                                    <span className="pointer-events-none absolute left-1/2 top-[7px] z-[1] h-[10px] w-[29%] -translate-x-1/2 rounded-full bg-[#111]" aria-hidden="true" />
-                                    <iframe
-                                        src={selectedArchivePath}
-                                        title={`${selectedPreview.page.title} interactive mobile page`}
-                                        loading="eager"
-                                        sandbox="allow-scripts allow-forms"
-                                        referrerPolicy="no-referrer"
-                                        className="block h-full w-full rounded-[21px] border-0 bg-white"
-                                    />
+                <Modal
+                    open={Boolean(selectedPreview)}
+                    onOpenChange={(open) => {
+                        if (!open) setSelectedPreview(null);
+                    }}
+                >
+                    {selectedPreview && selectedArchivePath && (
+                        <ModalContent
+                            variant="default"
+                            size="lg"
+                            className="h-[min(840px,calc(100dvh-24px))] w-[min(1080px,calc(100vw-24px))] max-w-none overflow-hidden p-0"
+                        >
+                            <div className="grid h-full min-h-0 grid-rows-[auto_minmax(0,1fr)]">
+                                <ModalHeader className="border-b border-line px-5 py-4 pr-14 sm:px-7">
+                                    <span className="font-mono text-[10px] uppercase tracking-[0.13em] text-subtle">
+                                        {selectedPreview.group.index} <span className="px-1 text-brand">/</span>{" "}
+                                        {selectedPreview.group.title}
+                                    </span>
+                                    <ModalTitle className="mt-1 text-xl font-semibold tracking-tight text-ink sm:text-2xl">
+                                        <RevealText
+                                            text={selectedPreview.page.title}
+                                            direction="left"
+                                            duration={0.55}
+                                            delay={70}
+                                        />
+                                    </ModalTitle>
+                                </ModalHeader>
+                                <div className="grid min-h-0 grid-rows-[minmax(260px,1fr)_auto] gap-5 overflow-y-auto p-4 sm:p-6 md:grid-cols-[minmax(0,1fr)_280px] md:grid-rows-1 md:gap-8">
+                                    <div className="grid min-h-[260px] min-w-0 place-items-center overflow-hidden rounded-card border border-line bg-[color-mix(in_oklch,var(--color-foreground)_4%,var(--color-background))] p-3 sm:p-5">
+                                        <div className="relative h-[min(62dvh,580px)] max-h-full max-w-full aspect-[9/16] rounded-[1.7rem] border border-neutral-700 bg-[linear-gradient(145deg,#383838,#090909_52%,#282828)] p-[5px] shadow-[var(--shadow-glass-md)]">
+                                            <span
+                                                className="pointer-events-none absolute left-1/2 top-2 z-[1] h-2.5 w-[29%] -translate-x-1/2 rounded-full bg-neutral-950"
+                                                aria-hidden="true"
+                                            />
+                                            <iframe
+                                                src={selectedArchivePath}
+                                                title={`${selectedPreview.page.title} interactive mobile page`}
+                                                loading="eager"
+                                                sandbox="allow-scripts allow-forms"
+                                                referrerPolicy="no-referrer"
+                                                className="block h-full w-full rounded-[1.35rem] border-0 bg-white"
+                                            />
+                                        </div>
+                                    </div>
+                                    <section className="flex min-w-0 flex-col items-start justify-center px-1 py-2">
+                                        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">
+                                            {selectedPreview.group.index} / Campaign index
+                                        </span>
+                                        <BlurFade delay={180} duration={550} blur={4} yOffset={7}>
+                                            <ModalDescription className="mb-0 mt-3 text-sm leading-relaxed text-muted">
+                                                {selectedPreview.page.note}. Explore the original mobile page inside the preview.
+                                            </ModalDescription>
+                                        </BlurFade>
+                                        <div className="mt-5 flex flex-wrap gap-2" aria-label="Page tags">
+                                            {getPageTags(selectedPreview.page, selectedPreview.group).map((tag) => (
+                                                <Badge key={tag} variant="outline" size="sm" className="rounded-full">
+                                                    {tag}
+                                                </Badge>
+                                            ))}
+                                        </div>
+                                        <div className="my-5 h-px w-full bg-line" />
+                                        <div className="grid gap-1">
+                                            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">Format</span>
+                                            <strong className="text-sm font-medium text-ink">Interactive mobile page</strong>
+                                        </div>
+                                        <Button asChild variant="default" size="lg" className="mt-6 w-full justify-between rounded-xl">
+                                            <a
+                                                href={selectedArchivePath}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="inline-flex w-full items-center justify-between gap-3 text-inherit no-underline"
+                                            >
+                                                Open full page <ExternalLink size={16} aria-hidden="true" />
+                                            </a>
+                                        </Button>
+                                    </section>
                                 </div>
                             </div>
-                            <section className="flex min-w-0 flex-col items-start justify-center px-1 md:px-1">
-                                <span className="font-mono text-[9px] tracking-[.08em] text-[#898781]">{selectedPreview.group.index} / CAMPAIGN INDEX</span>
-                                <h2 className="mt-2 text-[25px] font-medium leading-tight text-[#181817] md:mt-[13px] md:text-[30px]">{selectedPreview.page.title}</h2>
-                                <p className="mt-2 text-[11px] leading-relaxed text-[#66645f] md:mt-[11px] md:text-xs">{selectedPreview.page.note}. Explore the original mobile page inside the preview.</p>
-                                <div className="mt-2.5 flex flex-wrap gap-1.5 md:mt-[17px]" aria-label="Page tags">
-                                    {getPageTags(selectedPreview.page, selectedPreview.group).map((tag) => <Badge key={tag} variant="secondary" className="border border-[#e0dfda] text-[9px]">{tag}</Badge>)}
-                                </div>
-                                <div className="my-2.5 h-px w-full bg-[#deddd9] md:mt-[22px] md:mb-[13px]" />
-                                <div className="grid gap-[5px]">
-                                    <span className="font-mono text-[8px] tracking-[.09em] text-[#898781]">FORMAT</span>
-                                    <strong className="text-[11px] font-medium">Interactive mobile page</strong>
-                                </div>
-                                <Button asChild className="mt-3 w-full md:mt-[22px]">
-                                    <a className="inline-flex w-full items-center justify-center gap-2 text-inherit no-underline" href={selectedArchivePath} target="_blank" rel="noreferrer">Open full page <ExternalLink size={15} /></a>
-                                </Button>
-                            </section>
-                        </div>
-                    </div>
-                )}
-            </dialog>
-        </main>
+                        </ModalContent>
+                    )}
+                </Modal>
+            </main>
+        </MotionConfig>
     );
 }
