@@ -37,11 +37,18 @@ const contentTypes: Record<string, string> = {
   ".woff2": "font/woff2",
 };
 
+const phonePreviewStyles = `<style>
+* { scrollbar-width: thin !important; scrollbar-color: rgba(92, 92, 92, .48) transparent !important; }
+*::-webkit-scrollbar { width: 4px !important; height: 4px !important; }
+*::-webkit-scrollbar-track { background: transparent !important; }
+*::-webkit-scrollbar-thumb { border-radius: 4px !important; background: rgba(92, 92, 92, .48) !important; }
+</style>`;
+
 type RouteContext = {
   params: Promise<{ path: string[] }>;
 };
 
-export async function GET(_request: Request, { params }: RouteContext) {
+export async function GET(request: Request, { params }: RouteContext) {
   const { path } = await params;
 
   if (path.some((segment) => segment === "." || segment === ".." || segment.includes("\\"))) {
@@ -68,8 +75,18 @@ export async function GET(_request: Request, { params }: RouteContext) {
     const extension = extname(filePath).toLowerCase();
     const contentType = contentTypes[extension] ??
       (extension ? "application/octet-stream" : "text/javascript; charset=utf-8");
+    const isPhonePreview = isPage &&
+      extension === ".html" &&
+      new URL(request.url).searchParams.get("preview") === "phone";
+    let responseContent: BodyInit = new Uint8Array(content);
 
-    return new Response(content, {
+    if (isPhonePreview) {
+      const html = content.toString("utf8");
+      const styledHtml = html.replace(/<\/head\s*>/i, `${phonePreviewStyles}</head>`);
+      responseContent = styledHtml === html ? `${phonePreviewStyles}${html}` : styledHtml;
+    }
+
+    return new Response(responseContent, {
       headers: {
         "Content-Type": contentType,
         "Cache-Control": "no-cache",
